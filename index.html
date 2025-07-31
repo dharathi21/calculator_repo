@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="calculate.css">
+        
+
+
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <audio id="click-sound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
+
+        <div class="all">
+            <div class="side">
+            <img class="icon" src="https://cdn1.iconfinder.com/data/icons/hand-gestures-color/128/hand-clap-w-512.png" width="100px" height="100px">
+            <h1 style="color: antiquewhite;">Code Buddy</h1>
+            <h1 style="font-size:100px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;margin-top: 30px;letter-spacing:5px;">TapTap Calc </h1> 
+            <h2 style=" color: rgb(202, 169, 233);border-radius: 20px;"><b style="color: rgb(145, 99, 188);" >{</b>#funWithJS<b style="color:  rgb(145, 99, 188);">}</b></h2></div>
+            <div class="over"></div>
+            <div class="calculator">
+                
+        <form>
+            <div class="show">
+                <div  id="expression"></div>
+                <div id="result"></div>
+            </div>
+            <div>
+                <input class="Ac" type="button" value="AC" onclick="playClick(); clearAll()">
+                <input type="button" value="%"  onclick="append('%')">
+                <input type="button" value="DE" onclick="deletee()">
+                <input class="operator" type="button" value="/"  onclick="append('/')">
+            </div>
+            <div>
+                <input type="button" value="7"  onclick="append('7')">
+                <input type="button" value="8"  onclick="append('8')">
+                <input type="button" value="9"  onclick="append('9')">
+                <input  class="operator" type="button" value="*"  onclick="append('*')">
+            </div>
+            <div>
+                <input type="button" value="4"  onclick="append('4')">
+                <input type="button" value="5"  onclick="append('5')">
+                <input type="button" value="6"  onclick="append('6')">
+                <input class="operator" type="button" value="-"  onclick="append('-')">
+            </div>
+            <div>
+                <input type="button" value="1"  onclick="append('1')">
+                <input type="button" value="2"  onclick="append('2')">
+                <input type="button" value="3"  onclick="append('3')">
+                <input class="operator" type="button" value="+"  onclick="append('+')">
+            </div>
+            <div>
+                <input type="button" value="00"  onclick="append('00')">
+                <input type="button" value="0"  onclick="append('0')">
+                <input type="button" value="."  onclick="append('.')">
+                <input class="operator1" type="button" value="="  onclick="result()">
+            </div>
+        </form></div></div>
+        <footer></footer>
+        <div class="bottom"></div>
+    </body>
+    <script>
+        let expression="";
+        let calculated=false;
+        const expressiondiv =document.getElementById("expression");
+        const resultdiv=document.getElementById("result");
+        function playClick() {
+    const sound = document.getElementById("click-sound");
+    sound.currentTime = 0; // reset to start
+    sound.play();
+  }
+        function clearAll(){
+            expression="";
+            resultdiv.textContent="";
+            calculated=false;
+            update();
+        }
+        function append(value){
+            if(calculated){
+                expression="";
+                expression+=value;
+                calculated=false;
+                update();
+            }else{
+            expression+=value;
+            update();}
+        }
+        function deletee(){
+            expression=expression.slice(0,-1);
+            update();
+        }
+        function result(){
+            try{
+                const result=eval(expression);
+                resultdiv.textContent=result;
+                calculated=true;
+            }catch(e){
+                 resultdiv.textContent="ERROR";
+                 calculated=true;
+            }
+        }
+        function update(){
+            expressiondiv.textContent=expression;
+        }
+    </script>
+</html>
